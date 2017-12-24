@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vue示例-指令与事件</title>
+</head>
+
+<body>
+    <div id="app">
+        <p v-if="show">v-if插入或删除一段文本，启动快，不经常改变</p>
+        <p v-show="show">v-show显示或隐藏一段文本，启动慢，经常改变</p>
+        <button v-on:click="handleClick" >点击隐藏/显示</button>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script>
+        var vue = new Vue({
+            el: '#app',
+            data : {
+                show:true
+            },
+            methods: {
+                handleClick(){
+                    this.change();
+                },
+                change(){
+                    this.show=(this.show)?false:true;
+                }
+            }
+        });
+        //vue.handleClick();  //直接调用
+    </script>
+</body>
+
+</html>

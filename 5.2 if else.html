@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vue示例-条件判断渲染指令</title>
+    <link type="text/css" rel="stylesheet" href="vue.css"/>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <p v-if="status == 1">当status为1时显示该行</p>
+        <p v-else-if="status==2">当status为2时显示该行</p>
+        <p v-else>否则显示该行</p>
+        <!--======================================= -->
+        <div>
+            <template v-if="type == 'name' ">
+                <label>用户名：</label>
+                <input placeholder="请输入用户名" key="input-name">
+            </template>
+            <template v-else>
+                <label>邮箱：</label>
+                <input placeholder="请输入邮箱" key="input-email">
+            </template>
+            <button v-on:click="handleToggleClick">切换输入类型</button>
+        </div>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                status: 2,
+                type:'name'
+            },
+            methods: {
+                handleToggleClick(){
+                    this.type = (this.type == 'name')?'email':'name';
+                }  
+            }
+        })
+    </script>
+</body>
+</html>

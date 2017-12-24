@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vue示例-事件修饰符</title>
+    <link type="text/css" rel="stylesheet" href="vue.css" />
+</head>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!-- 阻击单击事件冒泡 -->
+        <a @click.stop="handle"></a>
+        <!-- 提交事件不再重载页面 -->
+        <form @submit.prevent="handle"></form>
+        <!-- 添加事件侦听器使用事件捕获模式,   有捕获先触发事件，剩余按默认冒泡模式触发 -->
+        <div @click.capture="handle">...</div>
+        <!-- 只当事件在该元素本身（而不是子元素）触发时间触发回调 -->
+        <div @click.self="handle">...</div>
+        <!-- 只触发一次，组件同样适用 -->
+        <div @click.once="handle">...</div>
+        <!-- 只有修饰符 -->
+        <a @click.prevent></a>
+        <!-- 修饰符可以串联 -->
+        <a @click.stop.prevent="handle"></a>
+
+        <!-- 表单元素上监听键盘事件，还可以使用按键修饰符，比如按下某个键时调用方法 
+         快捷键名称：.enter .tab .delete .esc .space .up .down .left .right
+                    .crtl  .alt  .shift  .meat (mac的command,windows的窗口键) -->
+        <input @keyup.13 = "submit">             <!-- 回车 -->
+        <input @keyup.ctrl.83 = "handleSave">   <!-- ctrl + s -->
+        <div @click.ctrl = "doSomething">doSomething</div> <!-- ctrl + 单击 -->
+
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            //el:document.getElementById("app"),
+            el: '#app'
+        });
+    </script>
+</body>
+
+</html>

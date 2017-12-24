@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vue示例-过滤器-错误的实现</title>
+    <link type="text/css" rel="stylesheet" href="vue.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <p v-pre> {{ v-pre元素包含的内容是不会被编译的, }}</p>
+        <p v-html="link"></p>
+        <p> {{ date }} </p>
+    </div>
+    <script>
+        //在年份、日期、小时等小于10前面补0
+        var padDate = function (value) {
+            return value < 10 ? "0" + value : value;
+        }
+    </script>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            //el:document.getElementById("app"),
+            el: '#app',
+            data: {
+                link: "v_html元素插入一段html, 例如：动态插入一段html",
+                date: new Date(),
+                days: 0
+            },
+            created: function () {
+                var _this = this;           //声明一个变量指向
+                var tim = setInterval(
+                    function () {
+                        _this.date = new Date();  // 修改date的数据
+                    }, 1000
+                );
+            },
+            mounted: function () {
+                if (this.tim) {
+                    clearInterval(this.tim);  //在Vue实例销毁前，清除我们的定时器
+                }
+            }
+        });
+        app.date = app.date.filter(function (item) {
+            return "";
+        });
+
+    </script>
+</body>
+
+</html>

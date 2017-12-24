@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vue示例-事件</title>
+    <link type="text/css" rel="stylesheet" href="vue.css" />
+</head>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        点击次数： {{ counter }}
+        <button v-on:click="counter++">+1</button>
+        <button v-on:click="handleAdd()">+1</button>
+        <button v-on:click="handleAdd(10)">+10</button>
+        <a href="http://www.apple.com" @click="handleClick('禁止打开',$event)">打开链接</a>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            //el:document.getElementById("app"),
+            el: '#app',
+            data: {
+                counter:0
+            },
+            methods: {
+                handleAdd(add){
+                    add = add || 1;
+                    this.counter += add;
+                },
+                handleClick(msg,event){
+                    event.preventDefault();
+                    alert(msg);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

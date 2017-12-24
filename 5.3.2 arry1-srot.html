@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vue示例-数组-过滤-排序</title>
+    <link type="text/css" rel="stylesheet" href="vue.css" />
+</head>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!-- 循环数据 -->
+        <ul>
+            <template v-for="book in Sortbooks">
+                <li>书名：{{ book.name }}</li>
+                <li>作者：{{ book.author }}</li>
+            </template>
+        </ul>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            //el:document.getElementById("app"),
+            el: '#app',
+            data: {
+                books: [
+                    { name: '<<Vus.js实战>>', author: '梁硕' },
+                    { name: '<<JavaScript语言精髓>>', author: 'Douglas Crockford' },
+                    { name: '<<JavaScript高级语言设计>>', author: 'Nicholas C.Zakas' }
+                ]
+            },
+            computed: {
+                Sortbooks(){
+                    return this.books.sort(function(a,b){
+                        return a.name.length < b.name.length;
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
